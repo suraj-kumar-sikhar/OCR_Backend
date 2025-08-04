@@ -4,7 +4,7 @@ from pdf2image import convert_from_path
 import pytesseract
 from PIL import Image
 from fastapi.middleware.cors import CORSMiddleware
-pytesseract.pytesseract.tesseract_cmd = r"C:\Users\suraj.sikhar\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
+# pytesseract.pytesseract.tesseract_cmd = r"C:\Users\suraj.sikhar\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
 
 app = FastAPI()
 
@@ -24,7 +24,7 @@ def root():
 async def extract(file:UploadFile =File(...)):
     with open("temp.pdf","wb") as f :
         f.write(await file.read())
-    images = convert_from_path("temp.pdf", poppler_path=r"C:\Users\suraj.sikhar\Downloads\Release-24.08.0-0\poppler-24.08.0\Library\bin")
+    images = convert_from_path("temp.pdf")
     text_output = ""
     for img in images:
         text_output += pytesseract.image_to_string(img)
