@@ -16,7 +16,9 @@ app.add_middleware(
     allow_headers=["*"],  
 )
 
-
+@app.get("/")
+def root():
+    return "Hello, Welcome to OCR PDF to Text"
 
 @app.post('/extract')
 async def extract(file:UploadFile =File(...)):
